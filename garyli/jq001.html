@@ -1,0 +1,25 @@
+<!doctype html>
+<html>
+<head>
+	<meta charset="UTF-8" />
+	<title>Document</title>
+	<script>
+		/*
+		* 匿名函数写法的推导：
+		* 假设有var fun = function(args){};
+		* 那么fun函数要执行时是fun(args);
+		* 匿名函数执行时，就可以把fun对应替换为匿名函数体，但是需要加()
+		*/
+		/*
+		* 匿名函数自执行的好处：
+		* 匿名函数内部的变量时局部的，能够有效防止和其他js框架变量名冲突
+		*/
+		(function(arg){
+			alert(arg);
+		})(1);
+	</script>
+</head>
+<body>
+	
+</body>
+</html>

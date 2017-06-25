@@ -1,0 +1,23 @@
+<!doctype html>
+<html>
+<head>
+	<meta charset="UTF-8" />
+	<title>Document</title>
+	<script>
+		/*
+		* 匿名自执行函数向外需要暴露接口，以供用户使用
+		*/
+		(function(window){
+			var a = 10;
+			var fun = function() {
+				alert(a);
+			};
+			window.$ = fun;
+		})(window);
+		$();
+	</script>
+</head>
+<body>
+	
+</body>
+</html>
