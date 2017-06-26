@@ -1,0 +1,54 @@
+<!doctype html>
+<html>
+<head>
+	<meta charset="UTF-8" />
+	<title>Document</title>
+	<script>
+		// jquery对象的创建以及继承分析
+
+		// 一般我们创建对象的方式
+		/*
+		function Aaa() {}
+		Aaa.prototype.css = function(){
+			alert("css");
+		};
+		var aaa = new Aaa();
+		aaa.css();
+		*/
+
+
+		// 我们希望可以使用Aaa().css()的方式调用
+		// Aaa()方法肯定要返回一个对象
+		/*
+		function Aaa() {
+			return new Bbb();
+		}
+		function Bbb() {};
+		Bbb.prototype.css = function(){
+			alert("css");
+		};
+		Aaa().css();
+    	*/
+
+
+    	// jQuery的方式
+    	function Aaa() {
+    		// 使用Aaa方法原型对象的
+			return new Aaa.prototype.init();
+		}
+		Aaa.prototype.init = function(){};
+		Aaa.prototype.css = function(){
+			alert("css");
+		};
+		// 将Aaa函数的原型赋给init函数的原型，
+		// 这样使用new Aaa.prototype.init()创建的对象就能够调用Aaa.prototype上的方法
+		// 这种方式比上面的方式要好，因为原本css()方法就应该是Aaa函数原型对象中的，创建一个Bbb会显得不符合逻辑
+		Aaa.prototype.init.prototype = Aaa.prototype;//init创建出来的对象也继承了Aaa.prototype对象中的所有属性和方法
+		Aaa().css();
+
+	</script>
+</head>
+<body>
+	
+</body>
+</html>

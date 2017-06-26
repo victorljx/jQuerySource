@@ -49,11 +49,50 @@ var
 	core_trim = core_version.trim,//String.trim
 
 
+	/*
+	* 知识点003: jQuery()构造函数
+	* 实际是创建了一个jQuery.fn.init()对象
+	* jQuery.fn.init.prototype = jQuery.prototype;
+	*/
 	// Define a local copy of jQuery
 	jQuery = function( selector, context ) {
 		// The jQuery object is actually just the init constructor 'enhanced'
 		return new jQuery.fn.init( selector, context, rootjQuery );
+	},
+
+
+	//各种正则表达式
+	// Used for matching numbers
+	core_pnum = /[+-]?(?:\d*\.|)\d+(?:[eE][+-]?\d+|)/.source,
+	// Used for splitting on whitespace
+	core_rnotwhite = /\S+/g,
+	// A simple way to check for HTML strings
+	// Prioritize #id over <tag> to avoid XSS via location.hash (#9521)
+	// Strict HTML recognition (#11290: must start with <)
+	rquickExpr = /^(?:\s*(<[\w\W]+>)[^>]*|#([\w-]*))$/,
+	// Match a standalone tag
+	rsingleTag = /^<(\w+)\s*\/?>(?:<\/\1>|)$/,
+	// Matches dashed string for camelizing
+	rmsPrefix = /^-ms-/,
+	rdashAlpha = /-([\da-z])/gi,
+
+
+	// 转驼峰的方法
+	// Used by jQuery.camelCase as callback to replace()
+	fcamelCase = function( all, letter ) {
+		return letter.toUpperCase();
+	},
+
+
+	// The ready event handler and self cleanup method
+	completed = function() {
+		document.removeEventListener( "DOMContentLoaded", completed, false );
+		window.removeEventListener( "load", completed, false );
+		jQuery.ready();
 	};
+
+
+
 
 	/*
 	* 知识点002：匿名函数自执行向外暴露的使用接口
