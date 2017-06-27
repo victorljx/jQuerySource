@@ -1,0 +1,29 @@
+<!doctype html>
+<html>
+<head>
+	<meta charset="UTF-8" />
+	<title>Document</title>
+	<script>
+		function Aaa() {}
+		// 此时，Aaa.prototype默认值是
+		// Aaa.prototype = {constructor:Aaa}
+		var a = new Aaa();
+		alert(a.constructor);
+
+		// 但是如果使用对象字面量的方式初始化prototype，则需要将构造函数重定向
+		Aaa.prototype = {
+			name : "xxx",
+			constructor : Aaa
+		};
+
+		var b = new Aaa();
+		// 如果不进行构造函数重定向，会根据原型链向上寻找到Object.constructor
+		alert(b.constructor);
+
+
+	</script>
+</head>
+<body>
+	
+</body>
+</html>
